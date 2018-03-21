@@ -11,6 +11,8 @@ TagManager:
   - StartText
   - Counter
   - Pause
+  - Time
+  - TimeText
   layers:
   - Default
   - TransparentFX

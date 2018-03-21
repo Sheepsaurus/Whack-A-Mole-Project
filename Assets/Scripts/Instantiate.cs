@@ -1,99 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
-using TMPro;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
     public class Instantiate : MonoBehaviour {
-
+        #region INITIALIZATION
+        // THE SPAWNPOINTS IN AN ARRAY
         public Transform[] SpawnPoints;
 
+        // THE PREFAB USED AS A REFERENCE TO WHAT TO SPAWN BY THE INSTANTIATE
         public Transform NpcPrefab;
 
+        // THE OFFSET USED TO MAKE SURE THE SPAWNED PREFAB IS POSITIONED CORRECTLY (Y + Z OFFSET)
         public Vector3 Offset;
 
-        private float _countdown = OptionStuff.OptionDifficulty/2, _randomCountdown = OptionStuff.OptionDifficulty, _startCountdown = OptionStuff.StartTimer;
+        // COUNTDOWNS INITIALISED
+        private float _countdown = OptionStuff.OptionDifficulty / 2; // HALF TO OFFSET
+        private float _randomCountdown = OptionStuff.OptionDifficulty; 
+        private float _startCountdown = OptionStuff.StartTimer; // 5 SECONDS
+        
+        // RANDOM GENERATOR VALUE
+        private int _newValue; // THIS VALUE IS COMPARED TO THE CURRENT VALUES IN THE LIST OF RANDOM VALUES - IF IT IS NOT ALREADY THERE, IT'S ADDED
 
-        private static float _timeLeft;
+        // LIST OF RANDOM VALUES
+        public static List<int> RandomValues = new List<int>(); // GIVEN IN INT
+        private bool _needToBeFilled; // DETERMINES IF THE LIST NEEDS TO BE FILLED UP AGAIN
 
-        private int _newValue;
+        #endregion
+        
+        #region START AND UPDATE
 
-        public static List<int> RandomValues = new List<int>();
-        private bool _needToBeFilled;
-
+        // IS ALWAYS CALLED AT THE CLICK OF THE PLAY BUTTON
         public void Start() {
+
+            // SET THE _needToBeFilled VALUE TO TRUE, SO IT WILL START TO FILL UP THE LIST
             _needToBeFilled = true;
-            _timeLeft = float.Parse(Settings.TimeLeft.text);
+            
         }
 
         public void Update() {
+
+            #region COUNTDOWNS
+
+            // A VISUAL COUNTDOWN, THAT SHOWS HOW MANY SECONDS WILL PASS, UNTIL THE GAME STARTS
             if (_startCountdown > 0) {
                 _startCountdown -= Time.deltaTime;
             }
-            
+
+            // A COUNTDOWN THAT TELLS THE GAME WHEN TO CREATE NEW RANDOM VALUES
             if (_randomCountdown > 0) {
                 _randomCountdown -= Time.deltaTime;
-               // Debug.Log("There are " + RandomCountdown + " random seconds left");
             }
 
+            // A COUNTDOWN THAT TELLS THE GAME WHEN TO MOVE THE SPAWNER
             if (_countdown > 0) {
                 _countdown -= Time.deltaTime;
-               // Debug.Log("There are " + Countdown + " seconds left");
             }
 
-            if (_timeLeft > 0) {
-                _timeLeft -= Time.deltaTime;
-                if (_timeLeft == 0) {
-                    return;
-                }
+            // A VISUAL COUNTDOWN THAT TELLS THE GAME HOW MANY SECONDS ARE LEFT UNTIL THE GAME IS OVER
+            Debug.Log(Menu.Modifier.TimeLeft);
+            if (Menu.Modifier.TimeLeft > 0 && _startCountdown < 0.1f) {
+                Debug.Log(Menu.Modifier.TimeLeft);
+                Menu.Modifier.TimeLeft -= Time.deltaTime;
             }
+            #endregion
 
-
+            // CALLING THE METHODS IN THIS ORDER: FIRST MOVE, THEN SPAWN - OVER AND OVER
             SpawnerMove();
             NpcSpawner();
         }
 
+        #endregion
+
+        #region SPAWNER
+
+        // THIS METHOD SPAWNS THE PREFAB
         private void NpcSpawner() {
 
-            if (_countdown <= 0) { // If the time is up, and it has not yet "spawned"
-                Instantiate(NpcPrefab, transform.position, Quaternion.identity); // Spawn **THIS PREFAB**, at the location of this scripts Transform, with this scripts, locations, rotation
+            if (_countdown <= 0) { // IF THE COUNTDOWN IS LESS THAN, OR EQUAL TO 0, EXECUTE THE FOLLOWING CODE
+                Instantiate(NpcPrefab, transform.position, Quaternion.identity); // SPAWN THE SELECTED PREFAB, AT THE SPECIFIED LOCATION, WITH THE SPECIFIC ROTATION
                 
-                _countdown = OptionStuff.OptionDifficulty; // Reset the countdown, to restart the Spawning process
+                _countdown = OptionStuff.OptionDifficulty; // RESET THE COOLDOWN, TO ALLOW IT TO LOOP
             }
         }
         
-        public void SpawnerMove() { // Use Time.deltaTime to _randomCountdown in Realtime
+        #endregion
+
+        #region SPAWER MOVE
+
+        // THIS METHOD MOVES THE SPAWNER, AFTER THE SPAWNER HAS SPAWNER
+        public void SpawnerMove() {
  
-            while (RandomValues.Count < 7 && _needToBeFilled) {
-                _newValue = Random.Range(0, SpawnPoints.Length);
-                if (!RandomValues.Contains(_newValue)) { //If the new value given, isn't already in the list, add it to the list
-                    RandomValues.Add(_newValue);
-                    Debug.Log("There are now " + RandomValues.Count + " random values");
+            while (RandomValues.Count < 7 && _needToBeFilled) { // WHILE THE LIST OF RANDOM VALUES HAS LESS THAN 7 VALUES, AND IT NEEDS TO BE FILLED, EXECUTE THE FOLLOWING CODE
+                _newValue = Random.Range(0, SpawnPoints.Length); // PROVIDE _newValue WITH A NEW VALUE
+                if (!RandomValues.Contains(_newValue)) { // COMPARE THE NEWLY PROVIDED _newValue TO THE LIST - IF THE VALUE IS IN THE LIST, DO NOTHING
+                    RandomValues.Add(_newValue); // ADD THE VALUE _newValue TO THE LIST OF RANDOM VALUES
                 }
             }
             
+            // WHEN THE LIST OF RANDOM VALUES HITS 7, THE ABOVE CODE STOPS RUNNING, AND IT REACHES THIS POINT. THEN IT WILL KNOW THAT IT NO LONGER NEEDS TO BE FILLED.
             _needToBeFilled = false;
 
-            if (_randomCountdown <= 0 && RandomValues.Count > 0 && _startCountdown <= 0) // If it has recently spawned something, and the _randomCountdown is done,
-            {                                                                     // and there are values left in your list
+            // IF THE _randomCountdown AND _startCountdown HAVE REACHED 0, AND THE LIST OF RANDOM VALUES HAS AT LEAST 1 VALUE IN IT, DO THE FOLLOWING CODE
+            if (_randomCountdown <= 0 && RandomValues.Count > 0 && _startCountdown <= 0)
+            {
+                // CHECK THE NUMBERS 0-6, IN ORDER, TO FIND OUT WHICH OF THOSE 7 NUMBERS ARE THE FIRST NUMBER IN THE LIST OF RANDOM VALUES
                 for (int i = 0; i < SpawnPoints.Length; i++) {
                     if (i == RandomValues[0]) {
-                        transform.position = SpawnPoints[i].position + Offset;
+                        transform.position = SpawnPoints[i].position + Offset; // IF IT MATCHES, MOVE TO THAT POSITION
                     }
                 }
 
+                // THEN REMOVE THE FIRST VALUE IN THE LIST OF RANDOM VALUES, AND RESET THE COUNTDOWN SO IT WON'T RUN AGAIN, UNTIL IT NEEDS TO
                 RandomValues.RemoveAt(0);
-                //Debug.Log("There are now " + RandomValues.Count + " random values");
                 _randomCountdown = OptionStuff.OptionDifficulty;
 
             }
 
+            // IF THE LIST OF RANDOM VALUES HAS LESS THAN THE SPECIFIED AMOUNT OF VALUES, SET _needToBeFilled TO TRUE, SO IT WILL GET FILLED UP AGAIN
             if (RandomValues.Count < OptionStuff.Simul + 1) {
                 _needToBeFilled = true;
             }
         }
+        #endregion
     }
 }

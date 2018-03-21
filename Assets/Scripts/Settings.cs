@@ -1,20 +1,22 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts {
     public class Settings : MonoBehaviour {
 
-        public static InputField TimeLeft;
+        public InputField TimeLeft;
 
         void Start() {
             DontDestroyOnLoad(transform.gameObject);
+
+            if (float.TryParse(TimeLeft.text, out OptionStuff.AdjustedValue)) {
+                Menu.Modifier.TimeLeft = OptionStuff.AdjustedValue;
+            }
         }
         
         public void Difficulty(float slideValue) {
             OptionStuff.OptionDifficulty = Math.Abs(slideValue);
-
         }
     }
 
@@ -22,5 +24,6 @@ namespace Assets.Scripts {
         public static float OptionDifficulty = 10f;
         public static float StartTimer = 5.9f;
         public static int Simul = 3;
+        public static float AdjustedValue;
     }
 }
