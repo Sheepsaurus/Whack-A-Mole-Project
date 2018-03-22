@@ -1,12 +1,10 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts {
     public class Settings : MonoBehaviour {
 
-        public static InputField TimeLeft;
         public InputField TimeLeft;
 
         void Start() {
