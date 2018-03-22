@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,10 +11,15 @@ namespace Assets.Scripts
 
         public static int HitMouse = 0;
 
-        void Update() {
-            TextChange();
-                _countdown -= Time.deltaTime;
+        public GameObject TimeL;
 
+        public GameObject TimeText;
+
+        public void Update() {
+            TextChange();
+            
+            _countdown -= Time.deltaTime;
+            
         }
 
         public void TextChange() {
@@ -26,6 +32,8 @@ namespace Assets.Scripts
             if (tag == "Start") {
 
                 if (_countdown < 0.2f) {
+                    TimeL.SetActive(true);
+                    TimeText.SetActive(true);
                     Destroy(gameObject);
                 } 
             }
@@ -36,6 +44,15 @@ namespace Assets.Scripts
                 if (_countdown < 0.2f) {
                     PauseMenu.GameIsPaused = false;
                     Destroy(gameObject);
+                }
+
+            }
+            
+            if (tag == "TimeText") {
+
+                if (_countdown < 0.1f) {
+                    PauseMenu.GameIsPaused = false;
+                    GetComponentInChildren<TextMeshProUGUI>().text =  "" + Math.Ceiling(Modifier.TimeLeft);
                 }
 
             }
@@ -50,6 +67,14 @@ namespace Assets.Scripts
         {
             Debug.Log("YOU PRESSED QUIT");
             Application.Quit();
+        }
+
+        public void Difficulty(float slideValue) {
+            OptionStuff.OptionDifficulty = Math.Abs(slideValue);
+        }
+
+        public static class Modifier {
+            public static float TimeLeft = 120;
         }
     }
 }
