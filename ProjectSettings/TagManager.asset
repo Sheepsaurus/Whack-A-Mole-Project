@@ -13,6 +13,7 @@ TagManager:
   - Pause
   - Time
   - TimeText
+  - StartTitle
   layers:
   - Default
   - TransparentFX

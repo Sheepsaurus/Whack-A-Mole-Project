@@ -23,38 +23,34 @@ namespace Assets.Scripts
         }
 
         public void TextChange() {
-            if (tag == "Diff") {
-                GetComponent<TextMeshProUGUI>().text = "Nuværende sværhedsgrad: " + OptionStuff.OptionDifficulty;
-            }
-            if (tag == "Counter") {
-                GetComponent<TextMeshProUGUI>().text = "Mus ramt: " + HitMouse;
-            }
-            if (tag == "Start") {
+            switch (tag) {
+                case "Diff":
+                    GetComponent<TextMeshProUGUI>().text = "Nuværende sværhedsgrad: " + OptionStuff.OptionDifficulty;
+                    break;
 
-                if (_countdown < 0.2f) {
-                    TimeL.SetActive(true);
-                    TimeText.SetActive(true);
-                    Destroy(gameObject);
-                } 
-            }
-            
-            if (tag == "StartText") {
-                GetComponentInChildren<TextMeshProUGUI>().text =  "" + Mathf.Floor(_countdown);
+                case "Counter":
+                    GetComponent<TextMeshProUGUI>().text = "Mus ramt: " + HitMouse;
+                    break;
 
-                if (_countdown < 0.2f) {
+                case "StartText":
+                    GetComponentInChildren<TextMeshProUGUI>().text = "" + Mathf.Floor(_countdown);
+                    break;
+
+                case "TimeText":
+                    GetComponentInChildren<TextMeshProUGUI>().text = "" + Math.Ceiling(Modifier.TimeLeft);
+                    break;
+
+                case "Start":
                     PauseMenu.GameIsPaused = false;
-                    Destroy(gameObject);
-                }
 
-            }
-            
-            if (tag == "TimeText") {
-
-                if (_countdown < 0.1f) {
-                    PauseMenu.GameIsPaused = false;
-                    GetComponentInChildren<TextMeshProUGUI>().text =  "" + Math.Ceiling(Modifier.TimeLeft);
-                }
-
+                    if (_countdown < 0.9f) {
+                        if (OptionStuff.TimeOn) {
+                            TimeL.SetActive(true);
+                            TimeText.SetActive(true);
+                        }
+                        Destroy(gameObject);
+                    }
+                break;
             }
         }
 
@@ -74,7 +70,7 @@ namespace Assets.Scripts
         }
 
         public static class Modifier {
-            public static float TimeLeft = 120;
+            public static float TimeLeft = 10;
         }
     }
 }
