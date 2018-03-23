@@ -5,13 +5,7 @@ using UnityEngine;
 namespace Assets.Scripts {
     
     public class Debugger : MonoBehaviour {
-
-        // Use this for initialization
-        void Start () {
-        }
-	
-        // Update is called once per frame
-        void Update () {
+	void Update () {
             if (B.ReqDebug) {
                 switch (Scripts.Instantiate.RandomValues.Count) {
                     case 7: {
@@ -90,4 +84,3 @@ namespace Assets.Scripts {
         }
     }
 }
-

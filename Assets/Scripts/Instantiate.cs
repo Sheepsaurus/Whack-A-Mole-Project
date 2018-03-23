@@ -9,6 +9,9 @@ namespace Assets.Scripts
         // THE SPAWNPOINTS IN AN ARRAY
         public Transform[] SpawnPoints;
 
+        // REFERENCE TO GAME END MENU
+        public GameObject GameEnd;
+
         // THE PREFAB USED AS A REFERENCE TO WHAT TO SPAWN BY THE INSTANTIATE
         public Transform NpcPrefab;
 
@@ -16,16 +19,16 @@ namespace Assets.Scripts
         public Vector3 Offset;
 
         // COUNTDOWNS INITIALISED
-        private float _countdown = OptionStuff.OptionDifficulty / 2; // HALF TO OFFSET
+        private float _countdown = OptionStuff.OptionDifficulty / 2; // HALVED TO OFFSET
         private float _randomCountdown = OptionStuff.OptionDifficulty; 
-        private float _startCountdown = OptionStuff.StartTimer; // 5 SECONDS
+        private float _startCountdown = OptionStuff.StartTimer;      // 5 SECONDS ON THE START TIMER
         
         // RANDOM GENERATOR VALUE
         private int _newValue; // THIS VALUE IS COMPARED TO THE CURRENT VALUES IN THE LIST OF RANDOM VALUES - IF IT IS NOT ALREADY THERE, IT'S ADDED
 
         // LIST OF RANDOM VALUES
         public static List<int> RandomValues = new List<int>(); // GIVEN IN INT
-        private bool _needToBeFilled; // DETERMINES IF THE LIST NEEDS TO BE FILLED UP AGAIN
+        private bool _needToBeFilled;                           // DETERMINES IF THE LIST NEEDS TO BE FILLED UP AGAIN
 
         #endregion
         
@@ -59,10 +62,14 @@ namespace Assets.Scripts
             }
 
             // A VISUAL COUNTDOWN THAT TELLS THE GAME HOW MANY SECONDS ARE LEFT UNTIL THE GAME IS OVER
-            Debug.Log(Menu.Modifier.TimeLeft);
-            if (Menu.Modifier.TimeLeft > 0 && _startCountdown < 0.1f) {
-                Debug.Log(Menu.Modifier.TimeLeft);
-                Menu.Modifier.TimeLeft -= Time.deltaTime;
+            if (Menu.Modifier.TimeLeft > 0 && _startCountdown < 0.1f && OptionStuff.TimeOn) {
+                Menu.Modifier.TimeLeft -= Time.deltaTime; // REDUCES THE VALUE OF Menu.Modifier.TimeLeft IN REALTIME
+
+                if (Menu.Modifier.TimeLeft <= 0) {
+                    GameEnd.SetActive(true);       // ENABLES THE Game End GAMEOBJECT
+                    Time.timeScale = 0f;           // SETS THE SPEED AT WHICH TIME PASSES TO 0
+                    PauseMenu.GameIsPaused = true; // SETS GameIsPaused TO TRUE
+                }
             }
             #endregion
 
