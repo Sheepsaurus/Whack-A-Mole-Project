@@ -1928,7 +1928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -210, y: -641.9}
+  m_AnchoredPosition: {x: -183, y: -611}
   m_SizeDelta: {x: -419.8, y: -1283.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &973600727
@@ -2545,7 +2545,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1350352518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1350352521}
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1350352518
@@ -2593,10 +2604,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 970947669}
-  PauseButton: {fileID: 1350352517}
-  ResumeButton: {fileID: 1668029942}
-  SettingsButton: {fileID: 1734753828}
-  MenuButton: {fileID: 166589430}
 --- !u!1 &1371142001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3448,10 +3455,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 1572024092}
-  PauseButton: {fileID: 0}
-  ResumeButton: {fileID: 0}
-  SettingsButton: {fileID: 0}
-  MenuButton: {fileID: 1553258034}
 --- !u!114 &1572024095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3906,7 +3909,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1668029943}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1350352521}
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1668029943
