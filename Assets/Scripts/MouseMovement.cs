@@ -9,7 +9,7 @@ namespace Assets.Scripts {
                       _originalY, // THE ORIGINAL Y POSITION OF THE MICE, UPON SPAWNING
                       _randomizer;
 
-        private const float SpeedAdjustDown = 4; // VALUE THAT DETERMINES THE SPEED AT WHICH THE MICE GO DOWNWARDS
+        private const float SpeedAdjustDown = 3; // VALUE THAT DETERMINES THE SPEED AT WHICH THE MICE GO DOWNWARDS
 
         public Sprite[] Mouse; // REFERENCE TO THE SPRITES
 
@@ -23,7 +23,7 @@ namespace Assets.Scripts {
             _timer = OptionStuff.OptionDifficulty * OptionStuff.Simul;
             _hasBeenClicked = false;
             Simul();
-            _randomizer = float.Parse(Random.Range(5, 21).ToString())/10;
+            _randomizer = float.Parse(Random.Range(1, 6).ToString())/10;
         }
 
         #endregion
@@ -33,8 +33,10 @@ namespace Assets.Scripts {
         // Update is called once per frame
         private void Update() {
             _timer -= Time.deltaTime; // INTERNAL TIMER, THAT GOES DOWN IN REALTIME
+            Debug.Log(_timer);
 
-            InvokeRepeating("MouseBehaviour", _randomizer, 0.2f); // THE DIFFICULTY SLIDER HAS VALUES 5 -> 1, THIS INVERTS IT
+            InvokeRepeating("MouseBehaviour", _randomizer, SpeedAdjustDown); // THE DIFFICULTY SLIDER HAS VALUES 5 -> 1, THIS INVERTS IT
+            
         }
             #region Mouse Behaviour
             public void MouseBehaviour() {
@@ -72,7 +74,7 @@ namespace Assets.Scripts {
 
                         // IF THE INTERNAL TIMER HAS REACHED 0
                         if (_timer < 0) {
-                            transform.Translate(0, -(SpeedAdjustDown * Time.deltaTime), 0); // MOVE GAMEOBJECT DOWNWARDS ON THE Y AXIS
+                            transform.Translate(0, -((16 - OptionStuff.OptionDifficulty) * Time.deltaTime), 0); // MOVE GAMEOBJECT DOWNWARDS ON THE Y AXIS
                         }
 
                         // IF THE GAMEOBJECT REACHES A LOWER Y-POSITION THAN IT ORIGINALLY SPAWNED AT
@@ -83,7 +85,7 @@ namespace Assets.Scripts {
 
                     // OTHERWISE, IF THE CURRENT POSITION ON THE Y AXIS IS LOWER THAN THE _maxY VALUE
                     else if (transform.position.y < _maxY) {
-                        transform.Translate(0, (6 - OptionStuff.OptionDifficulty) * Time.deltaTime, 0); // MOVE GAMEOBJECT UPWARDS ON THE Y AXIS
+                        transform.Translate(0, (16 - OptionStuff.OptionDifficulty) * Time.deltaTime, 0); // MOVE GAMEOBJECT UPWARDS ON THE Y AXIS
                     }
                 }
             }

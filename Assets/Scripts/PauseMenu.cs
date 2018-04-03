@@ -48,7 +48,7 @@ namespace Assets.Scripts {
         //Menu Method
         public void Menu() {
             Scripts.Menu.HitMouse = 0;         //Resets the MouseHit Count
-            OptionStuff.OptionDifficulty = 10; //Resets the DifficultySlider to the default value
+            OptionStuff.OptionDifficulty = 5; //Resets the DifficultySlider to the default value
             SceneManager.LoadScene(0);         //Loads the Menu Scene
         }
 
