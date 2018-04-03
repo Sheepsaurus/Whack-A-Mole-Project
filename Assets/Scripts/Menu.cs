@@ -13,12 +13,12 @@ namespace Assets.Scripts
 
         public GameObject TimeL;
 
-        public GameObject TimeText;
-
         public void Update() {
             TextChange();
-            _countdown -= Time.deltaTime;
-            
+            Debug.Log(_countdown);
+            if (_countdown >= 0.1f) {
+                _countdown -= Time.deltaTime;
+            }
         }
 
         public void TextChange() {
@@ -40,7 +40,7 @@ namespace Assets.Scripts
                     break;
 
                 case "TimeText":
-                    GetComponentInChildren<TextMeshProUGUI>().text = "" + Math.Ceiling(OptionStuff.TimeLeft);
+                    GetComponent<TextMeshProUGUI>().text = "" + Math.Ceiling(OptionStuff.TimeLeft);
                     break;
 
                 case "Start":
@@ -48,16 +48,16 @@ namespace Assets.Scripts
 
                     if (_countdown < 0.9f) {
                         if (OptionStuff.TimeOn && OptionStuff.TimeLeft > 0) {
+                            //Debug.Log("I AM IN");
 
                             TimeL.SetActive(true);
-                            TimeText.SetActive(true);
                         }
                         Destroy(gameObject);
                     }
 
-                    if (OptionStuff.TimeLeft <= 0) {
+                    if (OptionStuff.TimeLeft <= 1) {
+                        //Debug.Log("I AM OUT");
                         TimeL.SetActive(false);
-                        TimeText.SetActive(false);
                     }
                 break;
             }
