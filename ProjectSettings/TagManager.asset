@@ -14,6 +14,7 @@ TagManager:
   - Time
   - TimeText
   - StartTitle
+  - MouseText
   layers:
   - Default
   - TransparentFX
