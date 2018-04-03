@@ -7,7 +7,7 @@ namespace Assets.Scripts
         public float RotationSpeed;
 
         public void Update () {
-            transform.Rotate(0, 0, RotationSpeed); // ROTATE THE GAMEOBJECT ON THE Z AXIS
+            transform.Rotate(0, 0, RotationSpeed * Time.deltaTime); // ROTATE THE GAMEOBJECT ON THE Z AXIS
         }
     }
 }
