@@ -17,7 +17,6 @@ namespace Assets.Scripts
 
         public void Update() {
             TextChange();
-            
             _countdown -= Time.deltaTime;
             
         }
@@ -37,18 +36,24 @@ namespace Assets.Scripts
                     break;
 
                 case "TimeText":
-                    GetComponentInChildren<TextMeshProUGUI>().text = "" + Math.Ceiling(Modifier.TimeLeft);
+                    GetComponentInChildren<TextMeshProUGUI>().text = "" + Math.Ceiling(OptionStuff.TimeLeft);
                     break;
 
                 case "Start":
                     PauseMenu.GameIsPaused = false;
 
                     if (_countdown < 0.9f) {
-                        if (OptionStuff.TimeOn) {
+                        if (OptionStuff.TimeOn && OptionStuff.TimeLeft > 0) {
+
                             TimeL.SetActive(true);
                             TimeText.SetActive(true);
                         }
                         Destroy(gameObject);
+                    }
+
+                    if (OptionStuff.TimeLeft <= 0) {
+                        TimeL.SetActive(false);
+                        TimeText.SetActive(false);
                     }
                 break;
             }
@@ -67,10 +72,6 @@ namespace Assets.Scripts
 
         public void Difficulty(float slideValue) {
             OptionStuff.OptionDifficulty = Math.Abs(slideValue);
-        }
-
-        public static class Modifier {
-            public static float TimeLeft = 10;
         }
     }
 }

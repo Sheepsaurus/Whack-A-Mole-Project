@@ -6,7 +6,7 @@ namespace Assets.Scripts {
     public class Settings : MonoBehaviour {
         #region Initializations
         // REFERENCE TO THE INPUTFIELD IN THE SETTINGS MENU
-        public InputField TimeLeft;
+        public bool TimeIsNotSet;
         #endregion
 
         #region Value Modifications
@@ -14,11 +14,6 @@ namespace Assets.Scripts {
         public void Start() {
             // CARRY THE OBJECT WITH THIS SCRIPT ON, TO THE NEXT SCENE
             DontDestroyOnLoad(transform.gameObject);
-
-            // PARSE THE STRING VALUE TO A FLOAT VALUE
-            if (float.TryParse(TimeLeft.text, out OptionStuff.AdjustedValue)) {
-                Menu.Modifier.TimeLeft = OptionStuff.AdjustedValue;
-            }
         }
         
         // METHOD TO CHANGE THE VALUE OF THE DIFFICULTY
@@ -37,7 +32,7 @@ namespace Assets.Scripts {
     public static class OptionStuff {
 
         // THE DEFAULT DIFFICULTY VALUE
-        public static float OptionDifficulty = 10f;
+        public static float OptionDifficulty = 5f;
 
         // THE DEFAULT STARTING TIME
         public static float StartTimer = 5.9f;
@@ -50,6 +45,8 @@ namespace Assets.Scripts {
 
         // THE CHECKMARK TO DEFINE IF TIME IS SET TO ON
         public static bool TimeOn = false;
+
+        public static float TimeLeft;
     }
     #endregion
 }

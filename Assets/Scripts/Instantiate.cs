@@ -62,13 +62,14 @@ namespace Assets.Scripts
             }
 
             // A VISUAL COUNTDOWN THAT TELLS THE GAME HOW MANY SECONDS ARE LEFT UNTIL THE GAME IS OVER
-            if (Menu.Modifier.TimeLeft > 0 && _startCountdown < 0.1f && OptionStuff.TimeOn) {
-                Menu.Modifier.TimeLeft -= Time.deltaTime; // REDUCES THE VALUE OF Menu.Modifier.TimeLeft IN REALTIME
+            if (OptionStuff.TimeLeft > 0 && _startCountdown < 0.1f && OptionStuff.TimeOn) {
+                OptionStuff.TimeLeft -= Time.deltaTime; // REDUCES THE VALUE OF Menu.Modifier.TimeLeft IN REALTIME
 
-                if (Menu.Modifier.TimeLeft <= 0) {
+                if (OptionStuff.TimeLeft <= 0) {
                     GameEnd.SetActive(true);       // ENABLES THE Game End GAMEOBJECT
                     Time.timeScale = 0f;           // SETS THE SPEED AT WHICH TIME PASSES TO 0
                     PauseMenu.GameIsPaused = true; // SETS GameIsPaused TO TRUE
+
                 }
             }
             #endregion
