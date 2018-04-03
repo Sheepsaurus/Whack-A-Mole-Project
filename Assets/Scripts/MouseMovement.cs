@@ -35,7 +35,7 @@ namespace Assets.Scripts {
             _timer -= Time.deltaTime; // INTERNAL TIMER, THAT GOES DOWN IN REALTIME
             Debug.Log(_timer);
 
-            InvokeRepeating("MouseBehaviour", _randomizer, SpeedAdjustDown); // THE DIFFICULTY SLIDER HAS VALUES 5 -> 1, THIS INVERTS IT
+            Invoke("MouseBehaviour", _randomizer); // THE DIFFICULTY SLIDER HAS VALUES 5 -> 1, THIS INVERTS IT
             
         }
             #region Mouse Behaviour
