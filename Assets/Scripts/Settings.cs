@@ -4,18 +4,17 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts {
     public class Settings : MonoBehaviour {
-        #region Initializations
-        // REFERENCE TO THE INPUTFIELD IN THE SETTINGS MENU
-        public bool TimeIsNotSet;
-        #endregion
-
         #region Value Modifications
 
         public void Start() {
             // CARRY THE OBJECT WITH THIS SCRIPT ON, TO THE NEXT SCENE
             DontDestroyOnLoad(transform.gameObject);
         }
-        
+
+        public void Update() {
+            Simul();
+        }
+
         // METHOD TO CHANGE THE VALUE OF THE DIFFICULTY
         public void Difficulty(float slideValue) {
             OptionStuff.OptionDifficulty = Math.Abs(slideValue);
@@ -49,16 +48,17 @@ namespace Assets.Scripts {
         // THE DEFAULT STARTING TIME
         public static float StartTimer = 5.9f;
 
-        // THE DEFAULT AMOUNT OF MAXIMUM SIMULTANIOUS PREFABS
-        public static int Simul = 3;
-
         // THE PARSED VALUE GIVEN TO TIMELEFT
         public static float AdjustedValue;
 
+        //
+        public static float TimeLeft;
+
+        // THE DEFAULT AMOUNT OF MAXIMUM SIMULTANIOUS PREFABS
+        public static int Simul = 3;
+
         // THE CHECKMARK TO DEFINE IF TIME IS SET TO ON
         public static bool TimeOn = false;
-
-        public static float TimeLeft;
     }
     #endregion
 }

@@ -127,6 +127,24 @@ namespace Assets.Scripts
             }
 
             // IF THE LIST OF RANDOM VALUES HAS LESS THAN THE SPECIFIED AMOUNT OF VALUES, SET _needToBeFilled TO TRUE, SO IT WILL GET FILLED UP AGAIN
+            switch (OptionStuff.Simul) {
+                case 2:
+                    if (RandomValues.Count < OptionStuff.Simul) {
+                        _needToBeFilled = true;
+                    }
+                    break;
+                case 3:
+                    if (RandomValues.Count < OptionStuff.Simul + 1) {
+                        _needToBeFilled = true;
+                    }
+                    break;
+                case 4:
+                    if (RandomValues.Count < OptionStuff.Simul + 2) {
+                        _needToBeFilled = true;
+                    }
+                    break;
+            }
+
             if (RandomValues.Count < OptionStuff.Simul + 1) {
                 _needToBeFilled = true;
             }
