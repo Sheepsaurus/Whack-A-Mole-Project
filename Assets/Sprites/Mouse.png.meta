@@ -123,11 +123,11 @@ TextureImporter:
         serializedVersion: 2
         x: 257
         y: 770
-        width: 257
+        width: 255
         height: 254
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 2, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -135,13 +135,13 @@ TextureImporter:
       name: Mouse_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 513
         y: 769
-        width: 257
+        width: 256
         height: 255
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
