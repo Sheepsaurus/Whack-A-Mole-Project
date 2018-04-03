@@ -26,13 +26,25 @@ namespace Assets.Scripts {
             OptionStuff.TimeOn = Checked;
         }
 
+        public void Simul() {
+            if (OptionStuff.OptionDifficulty >= 2) {
+                OptionStuff.Simul = 4;
+            }
+            else if (OptionStuff.OptionDifficulty >= 1) {
+                OptionStuff.Simul = 3;
+            }
+            else {
+                OptionStuff.Simul = 2;
+            }
+        }
+
         #endregion
     }
     #region Static Values
     public static class OptionStuff {
 
         // THE DEFAULT DIFFICULTY VALUE
-        public static float OptionDifficulty = 5f;
+        public static float OptionDifficulty = 2.5f;
 
         // THE DEFAULT STARTING TIME
         public static float StartTimer = 5.9f;

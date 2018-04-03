@@ -20,10 +20,10 @@ namespace Assets.Scripts {
         private void Awake() {
             _originalY = transform.position.y;
             _maxY = _originalY + 3.4f;
-            _timer = OptionStuff.OptionDifficulty * OptionStuff.Simul;
+            _timer = OptionStuff.OptionDifficulty * OptionStuff.Simul + 1;
             _hasBeenClicked = false;
             Simul();
-            _randomizer = float.Parse(Random.Range(1, 6).ToString())/10;
+            _randomizer = float.Parse(Random.Range(1, 9).ToString())/10;
         }
 
         #endregion
@@ -33,9 +33,8 @@ namespace Assets.Scripts {
         // Update is called once per frame
         private void Update() {
             _timer -= Time.deltaTime; // INTERNAL TIMER, THAT GOES DOWN IN REALTIME
-            Debug.Log(_timer);
 
-            InvokeRepeating("MouseBehaviour", _randomizer, SpeedAdjustDown); // THE DIFFICULTY SLIDER HAS VALUES 5 -> 1, THIS INVERTS IT
+            Invoke("MouseBehaviour", _randomizer); // THE DIFFICULTY SLIDER HAS VALUES 5 -> 1, THIS INVERTS IT
             
         }
             #region Mouse Behaviour
@@ -96,6 +95,9 @@ namespace Assets.Scripts {
             if (_hasBeenClicked) {
                 transform.Translate(0, -(SpeedAdjustDown / 2 * Time.deltaTime), 0); // MOVE THE GAMEOBJECT DOWNWARDS ON THE Y AXIS
             }
+            if (transform.position.y < _originalY) {
+                Destroy(gameObject); // DESTROY THE GAMEOBJECT
+            }
         }
 
         private void OnMouseDown() {
@@ -109,10 +111,10 @@ namespace Assets.Scripts {
         }
 
         public void Simul() {
-            if (OptionStuff.OptionDifficulty >= 4) {
+            if (OptionStuff.OptionDifficulty >= 2) {
                 OptionStuff.Simul = 4;
             }
-            else if (OptionStuff.OptionDifficulty >= 2) {
+            else if (OptionStuff.OptionDifficulty >= 1) {
                 OptionStuff.Simul = 3;
             }
             else {

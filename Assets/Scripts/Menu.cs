@@ -24,7 +24,11 @@ namespace Assets.Scripts
         public void TextChange() {
             switch (tag) {
                 case "Diff":
-                    GetComponent<TextMeshProUGUI>().text = "Nuværende sværhedsgrad: " + OptionStuff.OptionDifficulty;
+                    GetComponent<TextMeshProUGUI>().text = "Nuværende sværhedsgrad: " + Mathf.Floor(OptionStuff.OptionDifficulty * 100) / 100;
+                    break;
+
+                case "MouseText":
+                    GetComponent<TextMeshProUGUI>().text = "Nuværende antal Mus: " + OptionStuff.Simul;
                     break;
 
                 case "Counter":
