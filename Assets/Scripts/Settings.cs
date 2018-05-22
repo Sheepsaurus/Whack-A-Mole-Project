@@ -13,11 +13,17 @@ namespace Assets.Scripts {
 
         public void Update() {
             Simul();
+            Debug.Log(OptionStuff.WeaponSelect);
         }
 
         // METHOD TO CHANGE THE VALUE OF THE DIFFICULTY
         public void Difficulty(float slideValue) {
             OptionStuff.OptionDifficulty = Math.Abs(slideValue);
+        }
+        
+        // METHOD TO CHANGE THE VALUE OF THE DIFFICULTY
+        public void WeaponSelect(int WeaponSprite) {
+            OptionStuff.WeaponSelect = WeaponSprite;
         }
 
         // METHOD TO TOGGLE TimeOn, ON OR OFF
@@ -59,6 +65,8 @@ namespace Assets.Scripts {
 
         // THE CHECKMARK TO DEFINE IF TIME IS SET TO ON
         public static bool TimeOn = false;
+
+        public static int WeaponSelect;
     }
     #endregion
 }

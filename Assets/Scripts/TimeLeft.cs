@@ -15,5 +15,10 @@ namespace Assets.Scripts {
                 OptionStuff.TimeLeft = OptionStuff.AdjustedValue;
             }
         }
+
+        public void WeaponSelect(int WeaponSprite)
+        {
+            OptionStuff.WeaponSelect = WeaponSprite;
+        }
     }
 }
