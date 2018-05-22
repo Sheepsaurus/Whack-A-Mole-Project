@@ -58,7 +58,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.54, y: 2.53}
+    oldSize: {x: 2.56, y: 2.95}
     newSize: {x: 2.54, y: 2.53}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -79,9 +79,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouse:
-  - {fileID: 21300000, guid: 5c659651133c84744af08f26ca8d80fc, type: 3}
-  - {fileID: 21300002, guid: 5c659651133c84744af08f26ca8d80fc, type: 3}
-  - {fileID: 21300004, guid: 5c659651133c84744af08f26ca8d80fc, type: 3}
+  - {fileID: 21300000, guid: 07028433cedd30a4ca5cb31ddb14eb46, type: 3}
+  - {fileID: 21300000, guid: a29364d4e00a26143a0febcd3dc029a4, type: 3}
+  - {fileID: 21300000, guid: cb18ff400d7e41c45bfad0c1c9ab6bcf, type: 3}
 --- !u!212 &212951472405597408
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5c659651133c84744af08f26ca8d80fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07028433cedd30a4ca5cb31ddb14eb46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
