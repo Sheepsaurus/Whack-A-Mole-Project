@@ -3,8 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts
-{
+namespace Assets.Scripts {
     public class Menu : MonoBehaviour {
 
         private float _countdown = OptionStuff.StartTimer;
@@ -14,8 +13,8 @@ namespace Assets.Scripts
         public GameObject TimeL;
 
         public void Update() {
+            Simul();
             TextChange();
-            Debug.Log(_countdown);
             if (_countdown >= 0.1f) {
                 _countdown -= Time.deltaTime;
             }
@@ -24,7 +23,8 @@ namespace Assets.Scripts
         public void TextChange() {
             switch (tag) {
                 case "Diff":
-                    GetComponent<TextMeshProUGUI>().text = "Nuværende sværhedsgrad: " + Mathf.Floor(OptionStuff.OptionDifficulty * 100) / 100;
+                    GetComponent<TextMeshProUGUI>().text =
+                        "Nuværende sværhedsgrad: " + Mathf.Floor(OptionStuff.OptionDifficulty * 100) / 100;
                     break;
 
                 case "MouseText":
@@ -52,6 +52,7 @@ namespace Assets.Scripts
 
                             TimeL.SetActive(true);
                         }
+
                         Destroy(gameObject);
                     }
 
@@ -59,7 +60,8 @@ namespace Assets.Scripts
                         //Debug.Log("I AM OUT");
                         TimeL.SetActive(false);
                     }
-                break;
+
+                    break;
             }
         }
 
@@ -76,6 +78,18 @@ namespace Assets.Scripts
 
         public void Difficulty(float slideValue) {
             OptionStuff.OptionDifficulty = Math.Abs(slideValue);
+        }
+
+        public void Simul() {
+            if (OptionStuff.OptionDifficulty >= 2) {
+                OptionStuff.Simul = 1;
+            }
+            else if (OptionStuff.OptionDifficulty >= 1) {
+                OptionStuff.Simul = 2;
+            }
+            else {
+                OptionStuff.Simul = 3;
+            }
         }
     }
 }

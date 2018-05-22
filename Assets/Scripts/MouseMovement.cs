@@ -112,13 +112,13 @@ namespace Assets.Scripts {
 
         public void Simul() {
             if (OptionStuff.OptionDifficulty >= 2) {
-                OptionStuff.Simul = 4;
-            }
-            else if (OptionStuff.OptionDifficulty >= 1) {
                 OptionStuff.Simul = 3;
             }
-            else {
+            else if (OptionStuff.OptionDifficulty >= 1) {
                 OptionStuff.Simul = 2;
+            }
+            else {
+                OptionStuff.Simul = 1;
             }
         }
         #endregion
