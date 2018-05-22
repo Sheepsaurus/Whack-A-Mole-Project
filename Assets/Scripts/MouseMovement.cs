@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Boo.Lang;
+using UnityEngine;
+using Animation = UnityEngine.Animation;
 
 namespace Assets.Scripts {
     public class MouseMovement : MonoBehaviour {
@@ -12,7 +14,8 @@ namespace Assets.Scripts {
         private const float SpeedAdjustDown = 3; // VALUE THAT DETERMINES THE SPEED AT WHICH THE MICE GO DOWNWARDS
 
         public Sprite[] Mouse; // REFERENCE TO THE SPRITES
-
+        public GameObject ChosenWeapon;
+        
         private bool _hasBeenClicked; // BOOL TO DETERMINE IF THE MOUSE HAS BEEN CLICKED
 
         // AWAKE IS USED TO SET INITIAL VALUES, UPON BEING SPAWNED. WHERE DOES IT SPAWN, WHERE CAN IT GO TO, HOW LONG CAN IT LIVE
@@ -24,6 +27,7 @@ namespace Assets.Scripts {
             _hasBeenClicked = false;
             Simul();
             _randomizer = float.Parse(Random.Range(1, 9).ToString())/10;
+            
         }
 
         #endregion
@@ -104,9 +108,17 @@ namespace Assets.Scripts {
             if (!PauseMenu.GameIsPaused) {
                 _hasBeenClicked = true;
                 Menu.HitMouse++;
-                gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                gameObject.GetComponent<SpriteRenderer>().sprite = Mouse[2];
+
+                Instantiate(ChosenWeapon, transform);
+
                 InvokeRepeating("Clicked", 0.5f, 0.00002f);
+
+                if (Animation.played == 1) {
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    gameObject.GetComponent<SpriteRenderer>().sprite = Mouse[2];
+                }
+
+                Animation.played = 0;
             }
         }
 

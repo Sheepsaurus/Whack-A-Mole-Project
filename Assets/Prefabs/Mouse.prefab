@@ -82,6 +82,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 07028433cedd30a4ca5cb31ddb14eb46, type: 3}
   - {fileID: 21300000, guid: a29364d4e00a26143a0febcd3dc029a4, type: 3}
   - {fileID: 21300000, guid: cb18ff400d7e41c45bfad0c1c9ab6bcf, type: 3}
+  ChosenWeapon: {fileID: 1901573667341956, guid: 6fbf26bc3bd3b5f499a1219cd0538310,
+    type: 2}
 --- !u!212 &212951472405597408
 SpriteRenderer:
   m_ObjectHideFlags: 1

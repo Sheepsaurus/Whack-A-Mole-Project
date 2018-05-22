@@ -5,7 +5,10 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - GameEnd: {instanceID: 0}
+  - NpcPrefab: {fileID: 4565683654092830, guid: f9a32f8ea8496ae4cb94d4fbbc7ed0f6,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
