@@ -16,6 +16,7 @@ namespace Assets.Scripts {
         public Sprite[] Mouse; // REFERENCE TO THE SPRITES
         public GameObject ChosenWeapon;
         
+
         private bool _hasBeenClicked; // BOOL TO DETERMINE IF THE MOUSE HAS BEEN CLICKED
 
         // AWAKE IS USED TO SET INITIAL VALUES, UPON BEING SPAWNED. WHERE DOES IT SPAWN, WHERE CAN IT GO TO, HOW LONG CAN IT LIVE
@@ -27,7 +28,25 @@ namespace Assets.Scripts {
             _hasBeenClicked = false;
             Simul();
             _randomizer = float.Parse(Random.Range(1, 9).ToString())/10;
-            
+            int b = OptionStuff.WeaponSelect;
+
+            switch (b) {
+                case 0:
+                    ChosenWeapon.transform.GetChild(b).gameObject.SetActive(true);
+                    ChosenWeapon.transform.GetChild(b+1).gameObject.SetActive(false);
+                    ChosenWeapon.transform.GetChild(b+2).gameObject.SetActive(false);
+                    break;
+                case 1:
+                    ChosenWeapon.transform.GetChild(b).gameObject.SetActive(true);
+                    ChosenWeapon.transform.GetChild(b-1).gameObject.SetActive(false);
+                    ChosenWeapon.transform.GetChild(b+1).gameObject.SetActive(false);
+                    break;
+                default:
+                    ChosenWeapon.transform.GetChild(b).gameObject.SetActive(true);
+                    ChosenWeapon.transform.GetChild(b-1).gameObject.SetActive(false);
+                    ChosenWeapon.transform.GetChild(b-2).gameObject.SetActive(false);
+                    break;
+            }
         }
 
         #endregion
@@ -113,12 +132,11 @@ namespace Assets.Scripts {
 
                 InvokeRepeating("Clicked", 0.5f, 0.00002f);
 
-                if (Animation.played == 1) {
+               
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     gameObject.GetComponent<SpriteRenderer>().sprite = Mouse[2];
-                }
+                
 
-                Animation.played = 0;
             }
         }
 
