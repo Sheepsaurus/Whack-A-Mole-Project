@@ -13,7 +13,6 @@ namespace Assets.Scripts {
 
         public void Update() {
             Simul();
-            Debug.Log(OptionStuff.WeaponSelect);
         }
 
         // METHOD TO CHANGE THE VALUE OF THE DIFFICULTY
@@ -66,7 +65,7 @@ namespace Assets.Scripts {
         // THE CHECKMARK TO DEFINE IF TIME IS SET TO ON
         public static bool TimeOn = false;
 
-        public static int WeaponSelect;
+        public static int WeaponSelect = 0;
     }
     #endregion
 }
