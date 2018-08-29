@@ -48,16 +48,12 @@ namespace Assets.Scripts {
 
                     if (_countdown < 0.9f) {
                         if (OptionStuff.TimeOn && OptionStuff.TimeLeft > 0) {
-                            //Debug.Log("I AM IN");
-
                             TimeL.SetActive(true);
                         }
-
                         Destroy(gameObject);
                     }
 
                     if (OptionStuff.TimeLeft <= 1) {
-                        //Debug.Log("I AM OUT");
                         TimeL.SetActive(false);
                     }
 
@@ -65,7 +61,7 @@ namespace Assets.Scripts {
             }
         }
 
-        public void StartGame() //Denne funktioner starter den angivne scene
+        public void StartGame() //Denne funktion starter den angivne scene
         {
             SceneManager.LoadScene(1);
         }

@@ -8,7 +8,6 @@ namespace Assets.Scripts {
         #region Initializations
 
         private float _timer = OptionStuff.OptionDifficulty, // A TIMER
-                      _maxY, // THE MAXIMUM Y POSITION THE MICE CAN MOVE TO
                       _originalY, // THE ORIGINAL Y POSITION OF THE MICE, UPON SPAWNING
                       _randomizer;
 
@@ -24,7 +23,6 @@ namespace Assets.Scripts {
         // IT HAS NOT YET BEEN CLICKED, AND THERE CAN ONLY BE "SO MANY" ALIVE
         private void Awake() {
             _originalY = transform.position.y;
-            _maxY = _originalY + 47f;
             _timer = OptionStuff.OptionDifficulty * OptionStuff.Simul + 1;
             _hasBeenClicked = false;
             Simul();
@@ -70,7 +68,6 @@ namespace Assets.Scripts {
                         Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position); // CREATE A Vector3 BASED ON THE POSITION
                         // OF THE TOUCH
 
-
                         Vector2 touchPos = new Vector2(wp.x, wp.y); // CREATE A NEW Vector2 VALUE, WITH THE X
                         // AND Y VALUES OF OUR NEWLY CREATED Vector3
 
@@ -82,14 +79,11 @@ namespace Assets.Scripts {
                                 _hasBeenClicked = true;
                                 Instantiate(ChosenWeapon, transform);
 
-                                InvokeRepeating("Clicked", 0.5f,
-                                    0.00002f); // INVOKES THE METHOD "CLICKED", AFTER 0.5
+                                InvokeRepeating("Clicked", 0.5f, 0.00002f); // INVOKES THE METHOD "CLICKED", AFTER 0.5
                                 // SECONDS AND EVERY 0.00002 SECONDS (CONSTANT)
 
-                                gameObject.GetComponent<BoxCollider2D>().enabled =
-                                    false; // DISABLES THE BOXCOLLIDER OF OUR MOUSE
-                                gameObject.GetComponent<SpriteRenderer>().sprite =
-                                    Mouse[2]; // CHANGES THE SPRITE OF OUR GAMEOBJECT
+                                gameObject.GetComponent<BoxCollider2D>().enabled = false; // DISABLES THE BOXCOLLIDER OF OUR MOUSE
+                                gameObject.GetComponent<SpriteRenderer>().sprite = Mouse[2]; // CHANGES THE SPRITE OF OUR GAMEOBJECT
 
                             }
                         }
@@ -113,7 +107,7 @@ namespace Assets.Scripts {
                     }
 
                     // OTHERWISE, IF THE CURRENT POSITION ON THE Y AXIS IS LOWER THAN THE _maxY VALUE
-                    else if (transform.position.y < _maxY) {
+                    else if (transform.position.y < _originalY + 47f) {
                         transform.Translate(0, (transform.localScale.y * 15 - OptionStuff.OptionDifficulty) * Time.deltaTime, 0); // MOVE GAMEOBJECT UPWARDS ON THE Y AXIS
                     }
                 }

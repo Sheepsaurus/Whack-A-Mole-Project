@@ -3,19 +3,18 @@
 namespace Assets.Scripts {
     public class Animation : MonoBehaviour {
 
-        private Animator animator;
+        private Animator _animator;
 
         public void Awake() {
-            animator = GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
         
-            animator.Play("WeaponSwing");
-            
+            _animator.Play("WeaponSwing");
         }
 
-        public static int played = 0;
+        public static int Played;
 
         public void changePlayed (int value) {
-            Animation.played = value;
+            Played = value;
         }
 
     }
