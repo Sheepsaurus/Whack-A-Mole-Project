@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -51,6 +52,10 @@ namespace Assets.Scripts {
             SceneManager.LoadScene(0);         //Loads the Menu Scene
             OptionStuff.TimeLeft = 0;
             OptionStuff.TimeOn = false;
+            if (OptionStuff.OptionDifficulty < 2.5)
+            {
+
+            }
         }
 
         #endregion
